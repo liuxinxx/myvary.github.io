@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  <title>docker安装kafka - liuxin</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
+  
+
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script  src="/js/utils.js" ></script>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>liuxin's blog</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+  <div class="mt-3 post-meta">
+    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+    <time datetime="2020-06-06 18:51">
+      2020年6月6日 晚上
+    </time>
+  </div>
+
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      890 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      12
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+            <article class="markdown-body">
+              <h1 id="docker安装kafka1-kafka需要zookeeper管理，所以需要先安装zookeeper。-下载docker-pull-wurstmeister-zookeeper-latest版本"><a href="#docker安装kafka1-kafka需要zookeeper管理，所以需要先安装zookeeper。-下载docker-pull-wurstmeister-zookeeper-latest版本" class="headerlink" title="docker安装kafka1:kafka需要zookeeper管理，所以需要先安装zookeeper。 下载docker pull wurstmeister/zookeeper:latest版本"></a>docker安装kafka1:kafka需要zookeeper管理，所以需要先安装zookeeper。 下载docker pull wurstmeister/zookeeper:latest版本</h1><pre><code class="hljs nginx"><span class="hljs-attribute">docker</span> pull wurstmeister/zookeeper</code></pre>
+<p><img src="https:////upload-images.jianshu.io/upload_images/14796116-307d1c0c1efd1229.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/647/format/webp" srcset="/img/loading.gif" alt="img"></p>
+<p>2：启动镜像生成容器</p>
+<pre><code class="hljs groovy">docker run -d --name zookeeper -p <span class="hljs-number">2181</span>:<span class="hljs-number">2181</span> -v <span class="hljs-regexp">/etc/</span><span class="hljs-string">localtime:</span><span class="hljs-regexp">/etc/</span>localtime wurstmeister/zookeeper</code></pre>
+
+
+
+<p><img src="https:////upload-images.jianshu.io/upload_images/14796116-c4eb11a2b8f2f4e7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1186/format/webp" srcset="/img/loading.gif" alt="img"></p>
+<p>3：下载kafka镜像</p>
+<pre><code class="hljs nginx"><span class="hljs-attribute">docker</span> pull wurstmeister/kafka</code></pre>
+<p><img src="https:////upload-images.jianshu.io/upload_images/14796116-f1dc71635b24d8eb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/638/format/webp" srcset="/img/loading.gif" alt="img"></p>
+<p>4：启动kafka镜像生成容器</p>
+<pre><code class="hljs routeros">docker <span class="hljs-builtin-name">run</span> -d --name kafka -p 9092:9092 -e <span class="hljs-attribute">KAFKA_BROKER_ID</span>=0 -e <span class="hljs-attribute">KAFKA_ZOOKEEPER_CONNECT</span>=192.168.155.56:2181/kafka -e <span class="hljs-attribute">KAFKA_ADVERTISED_LISTENERS</span>=PLAINTEXT://192.168.155.56:9092 -e <span class="hljs-attribute">KAFKA_LISTENERS</span>=PLAINTEXT://0.0.0.0:9092 -v /etc/localtime:/etc/localtime wurstmeister/kafka</code></pre>
+
+<p>*<em>-e KAFKA_BROKER_ID=0 在kafka集群中，每个kafka都有一个BROKER_ID来区分自己<br>*</em></p>
+<p>*<em>-e KAFKA_ZOOKEEPER_CONNECT=192.168.155.56:2181/kafka 配置zookeeper管理kafka的路径192.168.155.56:2181/kafka<br>*</em></p>
+<p>*<em>-e KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://192.168.155.56:9092 把kafka的地址端口注册给zookeeper<br>*</em></p>
+<p>*<em>-e KAFKA_LISTENERS=PLAINTEXT://0.0.0.0:9092 配置kafka的监听端口<br>*</em></p>
+<p><strong>-v /etc/localtime:/etc/localtime 容器时间同步虚拟机的时间</strong></p>
+<p><img src="https:////upload-images.jianshu.io/upload_images/14796116-4565050db8e8115f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1200/format/webp" srcset="/img/loading.gif" alt="img"></p>
+<p>5：验证kafka是否可以使用</p>
+<p>进入容器</p>
+<pre><code class="hljs applescript">docker exec -<span class="hljs-keyword">it</span> kafka /bin/sh</code></pre>
+<p>进入路径：<code>/opt/kafka_2.11-2.0.0/bin</code>下</p>
+<p>运行kafka生产者发送消息</p>
+<pre><code class="hljs vim">./kafka-console-producer.<span class="hljs-keyword">sh</span> --broker-<span class="hljs-keyword">list</span> localhos<span class="hljs-variable">t:9092</span> --topic <span class="hljs-keyword">sun</span></code></pre>
+<p>发送消息</p>
+<pre><code class="hljs json">&#123;<span class="hljs-attr">"datas"</span>:[&#123;<span class="hljs-attr">"channel"</span>:<span class="hljs-string">""</span>,<span class="hljs-attr">"metric"</span>:<span class="hljs-string">"temperature"</span>,<span class="hljs-attr">"producer"</span>:<span class="hljs-string">"ijinus"</span>,<span class="hljs-attr">"sn"</span>:<span class="hljs-string">"IJA0101-00002245"</span>,<span class="hljs-attr">"time"</span>:<span class="hljs-string">"1543207156000"</span>,<span class="hljs-attr">"value"</span>:<span class="hljs-string">"80"</span>&#125;],<span class="hljs-attr">"ver"</span>:<span class="hljs-string">"1.0"</span>&#125;</code></pre>
+<p><img src="https:////upload-images.jianshu.io/upload_images/14796116-43aa4c10f76894be.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1138/format/webp" srcset="/img/loading.gif" alt="img"></p>
+<p>‘</p>
+<p>运行kafka消费者接收消息</p>
+<pre><code class="hljs brainfuck"><span class="hljs-comment">kafka</span><span class="hljs-literal">-</span><span class="hljs-comment">console</span><span class="hljs-literal">-</span><span class="hljs-comment">consumer</span><span class="hljs-string">.</span><span class="hljs-comment">sh</span> --<span class="hljs-comment">bootstrap</span><span class="hljs-literal">-</span><span class="hljs-comment">server</span> <span class="hljs-comment">localhost:9092</span> --<span class="hljs-comment">topic</span> <span class="hljs-comment">sun</span> --<span class="hljs-comment">from</span><span class="hljs-literal">-</span><span class="hljs-comment">beginning</span></code></pre>
+<p><img src="https:////upload-images.jianshu.io/upload_images/14796116-83a67ecf3b2f4c61.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1135/format/webp" srcset="/img/loading.gif" alt="img"></p>
+<p><strong>——————————————————————-关键总结————————————————————————</strong></p>
+<p><strong>1：进入zookeeper容器内，可以看到kafka注册信息</strong></p>
+<p><strong>docker exec -it zookeeper /bin/sh</strong></p>
+<p><strong>进入bin目录</strong></p>
+<p><img src="https:////upload-images.jianshu.io/upload_images/14796116-d83a20041541403a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/651/format/webp" srcset="/img/loading.gif" alt="img"></p>
+<p><strong>运行zkCli.sh进入zookeeper客户端</strong></p>
+<p><strong>./zkCli.sh</strong></p>
+<p>**<br>**</p>
+<p><img src="https:////upload-images.jianshu.io/upload_images/14796116-892a97de85e8ff28.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1200/format/webp" srcset="/img/loading.gif" alt="img"></p>
+<p><strong>ls / 可以查看zookeeper根节点下都挂了那些目录</strong></p>
+<p><img src="https:////upload-images.jianshu.io/upload_images/14796116-c18fd13b09cf3921.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/257/format/webp" srcset="/img/loading.gif" alt="img"></p>
+<p><strong>可以看到我注册的kafka目录，运行</strong></p>
+<p>*<em>ls /kafka/brokers/topics/sun/partitions<br>*</em></p>
+<p><strong>可以看到我建立的topic叫sun主题的partitions信息</strong></p>
+<p><img src="https:////upload-images.jianshu.io/upload_images/14796116-caf9829a34569b6d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/591/format/webp" srcset="/img/loading.gif" alt="img"></p>
+<p><strong>get命令会显示该节点的节点数据内容和属性信息</strong><br><strong>get /kafka/brokers/topics/sun</strong></p>
+<p><img src="https:////upload-images.jianshu.io/upload_images/14796116-34064db5ad1e14da.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/519/format/webp" srcset="/img/loading.gif" alt="img"></p>
+<p>*<em>ls2命令会显示该节点的子节点信息和属性信息<br>*</em></p>
+<p><strong>ls2 /kafka/brokers/topics/sun</strong></p>
+<p><img src="https:////upload-images.jianshu.io/upload_images/14796116-630a5d53bcacc228.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/510/format/webp" srcset="/img/loading.gif" alt="img"></p>
+<p><strong>通过命令行创建topic和partitions</strong></p>
+<p><strong>kafka-topics.sh –create –zookeeper 192.168.155.56:2181/kafka –topic topic-test1 –replication-factor 1 –partitions 2</strong></p>
+<p><img src="https:////upload-images.jianshu.io/upload_images/14796116-94e14e20955def09.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/643/format/webp" srcset="/img/loading.gif" alt="img"></p>
+<p><strong>当创建的replication-factor=2时，因为zookeeper的zoo.cfg配置文件中tickTime=2000会报链接超时，把这个值调大一些，重启zookeeper，再创建topic正常。</strong></p>
+<p><img src="https:////upload-images.jianshu.io/upload_images/14796116-b77ca5319b1c783b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1173/format/webp" srcset="/img/loading.gif" alt="img"></p>
+<h4 id="删除topic-使用命令："><a href="#删除topic-使用命令：" class="headerlink" title="删除topic 使用命令："></a><strong>删除topic 使用命令：</strong></h4><p>若 delete.topic.enable=true </p>
+<p>直接彻底删除该 Topic。</p>
+<p>若 delete.topic.enable=false</p>
+<p>如果当前 Topic 没有使用过即没有传输过信息：可以彻底删除。</p>
+<p>如果当前 Topic 有使用过即有过传输过信息：并没有真正删除 Topic 只是把这个 Topic 标记为删除(marked for deletion)，重启 Kafka Server 后删除。</p>
+<p>我的kafka版本是最新的，在service.config文件中是找不到delete.topic.enable=true，系统默认是true.</p>
+<p>进入kafka容器，cd opt/kafka/bin</p>
+<p>kafka-topics.sh –delete –zookeeper 192.168.155.56:2181/kafka –topic sun</p>
+<p><img src="https:////upload-images.jianshu.io/upload_images/14796116-09656f3074e52240.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/646/format/webp" srcset="/img/loading.gif" alt="img"></p>
+<p>命令可以删除容器中的topic数据，还有zookeeper中的topic目录。</p>
+<p>可以在zookeeper中查看目录是否已经删除掉了</p>
+<p>进入zookeeper容器，在bin下运行./zkCli.sh</p>
+<p>ls /kafka/brokers/topics</p>
+<p><img src="https:////upload-images.jianshu.io/upload_images/14796116-f8bd882c138b2533.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/582/format/webp" srcset="/img/loading.gif" alt="img"></p>
+<p>还有一种暴力删除方法，因为我启动kafka容器的时候，没有外挂topic路径。所以我直接把容器删除掉，再重新启动一个新的容器也能实现topic的删除。（这种方式不推荐用）</p>
+<h4 id="docker-kafka-数据文件保存的路径："><a href="#docker-kafka-数据文件保存的路径：" class="headerlink" title="docker kafka 数据文件保存的路径："></a><strong>docker kafka 数据文件保存的路径：</strong></h4><p>在配置文件service.config中配置的，log.dirs配置保存路径。</p>
+<p>进入kafka容器,找到配置文件路径/opt/kafka_2.11-2.0.0/config</p>
+<p>vi service.config </p>
+<p><img src="https:////upload-images.jianshu.io/upload_images/14796116-37cb85979bd42d80.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/577/format/webp" srcset="/img/loading.gif" alt="img"></p>
+<p>默认配置在/kafka/kafka-logs-4eaa3ff7f59d下</p>
+<p><img src="https:////upload-images.jianshu.io/upload_images/14796116-70ee5558650d606c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/539/format/webp" srcset="/img/loading.gif" alt="img"></p>
+<p>作者：szgl_lucifer<br>链接：<a href="https://www.jianshu.com/p/e8c29cba9fae" target="_blank" rel="noopener">https://www.jianshu.com/p/e8c29cba9fae</a><br>来源：简书<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
+
+            </article>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/2020/06/05/test/">
+                        <span class="hidden-mobile">test</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>Fluid</span></a>
+    </div>
+    
+
+    
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: 'article.markdown-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "docker安装kafka&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
