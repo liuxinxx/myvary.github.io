@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  <title>CentOS 6.5 无界面安装 Oracle 11g R2 - liuxin</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
+  
+
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script  src="/js/utils.js" ></script>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>liuxin's blog</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+  <div class="mt-3 post-meta">
+    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+    <time datetime="2020-06-06 21:37">
+      2020年6月6日 晚上
+    </time>
+  </div>
+
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.7k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      24
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+            <article class="markdown-body">
+              <p>系统环境基于无外网和无图形化界面安装Oracle 11G。 <a id="more"></a></p>
+<h3 id="准备软件"><a href="#准备软件" class="headerlink" title="准备软件"></a>准备软件</h3><ul>
+<li><p>XShell+Xftp：用于连接Linux系统的终端模拟工具和FTP传输工具</p>
+</li>
+<li><p>Oracle安装文件下载（Oracle Database 11g Release 2安装包文件总大小约2G）：<br><a href="http://www.oracle.com/technetwork/database/enterprise-edition/downloads/index.html" target="_blank" rel="noopener">http://www.oracle.com/technetwork/database/enterprise-edition/downloads/index.html</a><br>下载完毕后会有两个文件（我所安装的Linux服务器是64位）：</p>
+<pre><code class="hljs linux.x64_11gR2_database_1of1.zip">&#96;&#96;&#96;linux.x64_11gR2_database_2of2.zip</code></pre>
+
+</li>
+</ul>
+<h3 id="检查系统配置"><a href="#检查系统配置" class="headerlink" title="检查系统配置"></a>检查系统配置</h3><p>Oracle Database 11g Release 2官方的系统配置要求如下：</p>
+<ul>
+<li><p>物理运行内存（Physical RAM）：1GB以上，推荐配置2GB以上<br>查看内存占用情况：</p>
+<pre><code class="hljs free">* 硬盘空间（Disk Space）：8GB以上，&#x2F;tmp目录剩余空间在1GB以上
+查看其他挂载区的目录使用情况：
+&#96;&#96;&#96;df -h</code></pre></li>
+<li><p>查看目录的剩余空间：</p>
+<pre><code class="hljs df">* 查看系统当前的版本：
+&#96;&#96;&#96;lsb_release -a</code></pre></li>
+<li><p>查看系统对应的版本和位数：</p>
+<pre><code class="hljs cat">
+我所安装的服务器环境是 Red Hat Enterprise Linux 4
+
+### 系统安装Oracle 11g R2所必须的安装包</code></pre>
+<p>binutils-2.15.92.0.2<br>compat-libstdc++-33-3.2.3<br>elfutils-libelf-0.97<br>elfutils-libelf-devel-0.97<br>expat-1.95.7<br>gcc-3.4.6<br>gcc-c++-3.4.6<br>glibc-2.3.4-2.41<br>glibc-common-2.3.4<br>glibc-devel-2.3.4<br>glibc-headers-2.3.4<br>libaio-0.3.105<br>libaio-devel-0.3.105<br>libgcc-3.4.6<br>libstdc++-3.4.6<br>libstdc++-devel3.4.6<br>make-3.80<br>numactl-0.6.4.x86_64<br>pdksh-5.2.14<br>sysstat-5.0.5</p>
+<pre><code class="hljs autohotkey">
+* 查询系统安装软件是否缺失：
+```rpm -qa|grep 软件包名</code></pre>
+<p>我所安装Oracle的服务器不能连接外网，只能通过下载安装包用FTP传输到服务器上安装，以上安装包缺失可以到一下地址查找：<br><a href="http://vault.centos.org/6.5/os/x86_64/Packages/" target="_blank" rel="noopener">http://vault.centos.org/6.5/os/x86_64/Packages/</a></p>
+</li>
+<li><p>安装软件命令(具体安装顺序自己调配，不能用通配符批量安装，会出现依赖问题)：</p>
+<pre><code class="hljs rpm">### 配置内核参数和资源限制
+使用vi编辑器对&#x2F;etc&#x2F;sysctl.conf文件进行编辑：
+&#96;&#96;&#96; vi &#x2F;etc&#x2F;sysctl.conf</code></pre>
+<p>文件末尾添加一下内容：</p>
+<pre><code class="hljs ini"><span class="hljs-attr">fs.aio-max-nr</span> = <span class="hljs-number">1048576</span>
+<span class="hljs-attr">fs.file-max</span> = <span class="hljs-number">6815744</span>
+<span class="hljs-attr">kernel.shmall</span> = <span class="hljs-number">2097152</span>
+<span class="hljs-attr">kernel.shmmax</span> = <span class="hljs-number">536870912</span>
+<span class="hljs-attr">kernel.shmmni</span> = <span class="hljs-number">4096</span>
+<span class="hljs-attr">kernel.sem</span> = <span class="hljs-number">250</span> <span class="hljs-number">32000</span> <span class="hljs-number">100</span> <span class="hljs-number">128</span>
+<span class="hljs-attr">net.ipv4.ip_local_port_range</span> = <span class="hljs-number">9000</span> <span class="hljs-number">65500</span>
+<span class="hljs-attr">net.core.rmem_default</span> = <span class="hljs-number">262144</span>
+<span class="hljs-attr">net.core.rmem_max</span> = <span class="hljs-number">4194304</span>
+<span class="hljs-attr">net.core.wmem_default</span> = <span class="hljs-number">262144</span>
+<span class="hljs-attr">net.core.wmem_max</span> = <span class="hljs-number">1048576</span></code></pre></li>
+<li><p>使内核参数生效，执行命令:</p>
+<pre><code class="hljs sysctl">### 创建Oracle相关用户
+* 创建用户组oinstall：
+&#96;&#96;&#96;groupadd -g 200 oinstall</code></pre></li>
+<li><p>创建用户组dba：</p>
+<pre><code class="hljs groupadd">* 创建oracle用户并指定用户组和Oracle用户的用户目录：
+&#96;&#96;&#96;useradd -u 440 -g oinstall -G dba -d &#x2F;home&#x2F;oracle oracle</code></pre>
+</li>
+<li><p>更改Oracle用户的用户登录密码：</p>
+<pre><code class="hljs passwd">
+### 修改登录系统参数
+
+* 使用vi编辑器对&#x2F;etc&#x2F;pam.d&#x2F;login文件进行编辑：
+&#96;&#96;&#96;vi &#x2F;etc&#x2F;pam.d&#x2F;login</code></pre>
+<p>在文件末尾添加:</p>
+<pre><code class="hljs session">
+### 修改Oracle软件安装用户的资源限制
+* 使用vi编辑器对&#x2F;etc&#x2F;security&#x2F;limits.conf文件进行编辑：
+&#96;&#96;&#96;vi &#x2F;etc&#x2F;security&#x2F;limits.conf</code></pre>
+<p>在文件末尾添加:</p>
+<pre><code class="hljs angelscript">oracle soft nproc <span class="hljs-number">2047</span>
+oracle hard nproc <span class="hljs-number">16384</span>
+oracle soft nofile <span class="hljs-number">1024</span>
+oracle hard nofile <span class="hljs-number">65536</span></code></pre>
+<h3 id="修改环境变量文件"><a href="#修改环境变量文件" class="headerlink" title="修改环境变量文件"></a>修改环境变量文件</h3></li>
+<li><p>使用vi编辑器对/etc/profile文件进行编辑：</p>
+<pre><code class="hljs routeros">vi /etc/profile
+在文件末尾添加：
+<span class="hljs-keyword">if</span> [ <span class="hljs-variable">$USER</span> = <span class="hljs-string">"oracle"</span> ]; then
+<span class="hljs-keyword">if</span> [ <span class="hljs-variable">$SHELL</span> = <span class="hljs-string">"/bin/ksh"</span> ]; then
+ulimit -p 16384
+ulimit -n 65536
+<span class="hljs-keyword">else</span>
+ulimit -u 16384 -n 65536
+fi
+fi</code></pre></li>
+<li><p>更新配置文件更改：</p>
+<pre><code class="hljs source">### 创建目录并分配权限
+* 创建目录
+
+&#96;&#96;&#96;mkdir &#x2F;oracle</code></pre></li>
+<li><p>授权目录给当前用户/其他用户/用户组 可读可写可执行</p>
+</li>
+</ul>
+<pre><code class="hljs chmod">&#96;&#96;&#96;chown -R oracle:oinstall &#x2F;oracle</code></pre>
+
+<ul>
+<li>切换到oracle帐号并添加oracle用户下面的环境变量：</li>
+</ul>
+<pre><code class="hljs su">
+* 使用vi编辑器对用户目录下.bash_profile文件进行编辑：
+
+&#96;&#96;&#96;vi ~&#x2F;.bash_profile</code></pre>
+<p>在.base_profile里面添加如下内容（有些内容存在就不用加，对照着修改）<br>ORACLE_HOME在配置时注意后面不要带有:分隔符，否则PATH会取不到；<br>ORACLE_HOME的路径；<br>ORACLE_SID是对应后面创建数据库SID的，可以随时更改；<br>以下是配置内容：</p>
+<pre><code class="hljs routeros"><span class="hljs-attribute">PATH</span>=<span class="hljs-variable">$PATH</span>:$HOME/bin
+umask 022
+<span class="hljs-builtin-name">export</span> PATH
+<span class="hljs-builtin-name">export</span> <span class="hljs-attribute">ORACLE_BASE</span>=/oracle
+<span class="hljs-builtin-name">export</span> <span class="hljs-attribute">ORACLE_SID</span>=orcl
+<span class="hljs-builtin-name">export</span> <span class="hljs-attribute">ORACLE_HOME</span>=<span class="hljs-variable">$ORACLE_BASE</span>/product/11.2.0/dbhome_1
+<span class="hljs-builtin-name">export</span> <span class="hljs-attribute">PATH</span>=<span class="hljs-variable">$PATH</span>:$ORACLE_HOME/bin:</code></pre>
+<h3 id="安装数据库"><a href="#安装数据库" class="headerlink" title="安装数据库"></a>安装数据库</h3><ul>
+<li><p>Ctrl+D注销Oracle用户，切换成root用户</p>
+</li>
+<li><p>解压Oracle 11g R2 数据库压缩包（在本文我已经把数据库压缩包用FTP软件传输到/tmp目录下），执行命令：</p>
+<pre><code class="hljs properties"><span class="hljs-attr">cd</span> <span class="hljs-string">/tmp</span>
+<span class="hljs-attr">unzip</span> <span class="hljs-string">linux.x64_11gR2_database_1of2.zip</span>
+<span class="hljs-attr">unzip</span> <span class="hljs-string">linux.x64_11gR2_database_2of2.zip</span></code></pre></li>
+<li><p>拷贝database/response/下面的dbca.rsp、db_install.rsp及netca.rsp三个文件至/home/oracle目录中：</p>
+<pre><code class="hljs dts">cp database<span class="hljs-meta-keyword">/response/</span>dbca.rsp <span class="hljs-meta-keyword">/home/</span>oracle/
+cp database<span class="hljs-meta-keyword">/response/</span>db_install.rsp <span class="hljs-meta-keyword">/home/</span>oracle/
+cp database<span class="hljs-meta-keyword">/response/</span>netca.rsp <span class="hljs-meta-keyword">/home/</span>oracle/
+chmod <span class="hljs-number">777</span> <span class="hljs-meta-keyword">/home/</span>oracle/dbca.rsp</code></pre>
+</li>
+<li><p>使用vi编辑数据库安装的配置文件db_install.rsp：</p>
+</li>
+</ul>
+<pre><code class="hljs jboss-cli"><span class="hljs-keyword">cd</span> <span class="hljs-string">/home/oracle</span>
+vi db_install.rsp</code></pre>
+<p>修改如下参数:</p>
+<pre><code class="hljs ini"><span class="hljs-attr">Oracle.install.option</span>=INSTALL_DB_SWONLY
+<span class="hljs-attr">ORACLE_HOSTNAME</span>= master
+<span class="hljs-attr">UNIX_GROUP_NAME</span>=oinstall
+<span class="hljs-attr">INVENTORY_LOCATION</span>=/oracle/oraInventory
+<span class="hljs-attr">SELECTED_LANGUAGES</span>=en,zh_CN
+<span class="hljs-attr">ORACLE_HOME</span>=/oracle/product/<span class="hljs-number">11.2</span>.<span class="hljs-number">0</span>/dbhome_1
+<span class="hljs-attr">ORACLE_BASE</span>=/oracle
+<span class="hljs-attr">Oracle.install.db.InstallEdition</span>=EE
+<span class="hljs-attr">Oracle.install.db.DBA_GROUP</span>=dba
+<span class="hljs-attr">Oracle.install.db.OPER_GROUP</span>=oinstall
+<span class="hljs-attr">Oracle.install.db.config.starterdb.type</span>=GENERAL_PURPOSE
+<span class="hljs-attr">Oracle.install.db.config.starterdb.globalDBName</span>=orcl
+<span class="hljs-attr">Oracle.install.db.config.starterdb.SID</span>=orcl
+<span class="hljs-attr">Oracle.install.db.config.starterdb.characterSet</span>=ZHS16GBK
+<span class="hljs-attr">Oracle.install.db.config.starterdb.password.ALL</span>=oracle
+<span class="hljs-attr">DECLINE_SECURITY_UPDATES</span>=<span class="hljs-literal">true</span></code></pre>
+<ul>
+<li><p>切换到oracle 帐号，创建oraInventory目录：</p>
+<pre><code class="hljs su">&#96;&#96;&#96;mkdir &#x2F;oracle&#x2F;oraInventory</code></pre>
+</li>
+<li><p>切换到刚才解压的Oracle安装文件根目录中：</p>
+<pre><code class="hljs cd">* 开始执行安装操作：
+&#96;&#96;&#96;.&#x2F;runInstaller -silent -ignorePrereq -responseFile &#x2F;home&#x2F;oracle&#x2F;db_install.rsp</code></pre>
+<p>在/oracle/oraInventory/logs/可以查看对应的安装日志文件。</p>
+</li>
+<li><p>上述执行成功会提示执行两个脚本<br>Ctrl+D注销Oracle用户，切换成root用户<br>执行orainstRoot.sh及root.sh两脚本：</p>
+<pre><code class="hljs stata"><span class="hljs-keyword">cd</span> /oracle/oraInventory
+<span class="hljs-keyword">sh</span> orainstRoot.<span class="hljs-keyword">sh</span>
+<span class="hljs-keyword">cd</span> /oracle/product/11.2.0/dbhome_1
+<span class="hljs-keyword">sh</span> root.<span class="hljs-keyword">sh</span></code></pre></li>
+<li><p>切换成oracle用户：</p>
+<pre><code class="hljs su">
+* 安装监听,直接执行监听脚本:
+&#96;&#96;&#96;netca &#x2F;silent &#x2F;responseFile &#x2F;home&#x2F;oracle&#x2F;netca.rsp</code></pre>
+<h3 id="安装数据库实例"><a href="#安装数据库实例" class="headerlink" title="安装数据库实例"></a>安装数据库实例</h3></li>
+<li><p>使用vi编辑配置文件dbca.rsp：</p>
+<pre><code class="hljs vi">修改以下配置，后面5个都要删掉前面的#号改参数值:</code></pre>
+<p>GDBNAME=”orcl”<br>SID=”orcl”<br>DATAFILEDESTINATION=”/oracle/oradata”<br>RECOVERYAREADESTINATION=”/oracle/flash_recovery_area”<br>CHARACTERSET=”ZHS16GBK”<br>TOTALMEMORY=”800”<br>SYSPASSWORD = “password”<br>SYSTEMPASSWORD = “password”</p>
+<pre><code class="hljs clean">上面配置注意去掉#,不然是注释不生效
+SYSPASSWORD和SYSTEMPASSWORD是sys和<span class="hljs-keyword">system</span>数据库用户的默认密码（自己自行设置），不设置密码无法安装实例，显示终端一直滚动换行。
+
+* 静默模式建实例（确保在oracle用户下执行）:</code></pre>
+<p>cd ~<br>dbca -silent -responseFile ~/dbca.rsp</p>
+<pre><code class="hljs autohotkey">如果出现```Set DISPLAY environment variable, then re-run.``` 错误</code></pre>
+<p>export DISPLAY=:1.0</p>
+<pre><code class="hljs autohotkey">
+然后在执行
+
+另外：删除数据库实例方法，更改以上配置文件中的OPERATION_TYPE,默认为createDatabase，变更为一下内容：
+
+```OPERATION_TYPE = <span class="hljs-string">"deleteDatabase"</span></code></pre>
+
+</li>
+</ul>
+<p>执行命令：</p>
+<pre><code class="hljs dbca">
+### 测试和修改Oracle用户密码有效期
+* 执行命令：
+&#96;&#96;&#96;sqlplus &#x2F;nolog</code></pre>
+
+<ul>
+<li><p>SQLPlus：<br>以sysdba身份登录：</p>
+<pre><code class="hljs conn">查询用户密码有效时间：
+&#96;&#96;&#96;SELECT * FROM dba_profiles s WHERE s.profile&#x3D;&#39;DEFAULT&#39; AND resource_name&#x3D;&#39;PASSWORD_LIFE_TIME&#39;;</code></pre>
+<p>修改有效时间为不限制：</p>
+<pre><code class="hljs ALTER">
+#### 附上一些命令查看Oracle端口和Oracle进程
+* 查看Oracle开放的1521端口号：
+&#96;&#96;&#96;netstat -lnp|grep 1521</code></pre>
+</li>
+<li><p>查看oracle进程：<br><code>ps -ef|grep oracle</code></p>
+</li>
+</ul>
+<p>参考文章：<br><a href="http://docs.oracle.com/cd/E11882_01/install.112/e24326/toc.htm#CEGIHDBF" target="_blank" rel="noopener">http://docs.oracle.com/cd/E11882_01/install.112/e24326/toc.htm#CEGIHDBF</a><br><a href="http://haowen.blog.51cto.com/3486731/1599042" target="_blank" rel="noopener">http://haowen.blog.51cto.com/3486731/1599042</a><br><a href="https://zhuanlan.zhihu.com/p/22600543?utm_source=qq&amp;utm_medium=social" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/22600543?utm_source=qq&amp;utm_medium=social</a></p>
+
+            </article>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/oracle-centos/">oracle,centos</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/2020/06/05/test/">
+                        <span class="hidden-mobile">test</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>Fluid</span></a>
+    </div>
+    
+
+    
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: 'article.markdown-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "CentOS 6.5 无界面安装 Oracle 11g R2&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
