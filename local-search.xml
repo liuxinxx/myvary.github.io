@@ -4,6 +4,25 @@
   
   
   <entry>
+    <title>firewalld对指定IP开放指定端口的配置</title>
+    <link href="/2020/06/06/firewalld%E5%AF%B9%E6%8C%87%E5%AE%9AIP%E5%BC%80%E6%94%BE%E6%8C%87%E5%AE%9A%E7%AB%AF%E5%8F%A3%E7%9A%84%E9%85%8D%E7%BD%AE/"/>
+    <url>/2020/06/06/firewalld%E5%AF%B9%E6%8C%87%E5%AE%9AIP%E5%BC%80%E6%94%BE%E6%8C%87%E5%AE%9A%E7%AB%AF%E5%8F%A3%E7%9A%84%E9%85%8D%E7%BD%AE/</url>
+    
+    <content type="html"><![CDATA[<h1 id="1-打开firewalld防火墙"><a href="#1-打开firewalld防火墙" class="headerlink" title="1.打开firewalld防火墙"></a>1.打开<a href="https://www.centos.bz/tag/firewalld/" target="_blank" rel="noopener">firewalld</a>防火墙</h1><pre><code class="hljs crmsh">systemctl <span class="hljs-literal">start</span> firewalld.service</code></pre><h1 id="2-添加防火墙规则（对指定ip开放指定端口）"><a href="#2-添加防火墙规则（对指定ip开放指定端口）" class="headerlink" title="2.添加防火墙规则（对指定ip开放指定端口）"></a>2.添加防火墙规则（对指定ip开放指定端口）</h1><pre><code class="hljs routeros"><span class="hljs-comment">#（1） Postgresql端口设置。允许192.168.142.166访问5432端口</span>firewall-cmd --permanent <span class="hljs-attribute">--add-rich-rule</span>=<span class="hljs-string">"rule family="</span>ipv4" source <span class="hljs-attribute">address</span>=<span class="hljs-string">"192.168.142.166"</span><span class="hljs-built_in"> port </span><span class="hljs-attribute">protocol</span>=<span class="hljs-string">"tcp"</span> <span class="hljs-attribute">port</span>=<span class="hljs-string">"5432"</span> accept<span class="hljs-string">"</span><span class="hljs-string"></span><span class="hljs-string"></span><span class="hljs-string">#（2）redis端口设置。允许192.168.142.166访问6379端口</span><span class="hljs-string"></span><span class="hljs-string">firewall-cmd --permanent --add-rich-rule="</span>rule <span class="hljs-attribute">family</span>=<span class="hljs-string">"ipv4"</span> source <span class="hljs-attribute">address</span>=<span class="hljs-string">"192.168.142.166"</span><span class="hljs-built_in"> port </span><span class="hljs-attribute">protocol</span>=<span class="hljs-string">"tcp"</span> <span class="hljs-attribute">port</span>=<span class="hljs-string">"6379"</span> accept<span class="hljs-string">"</span><span class="hljs-string"></span><span class="hljs-string">#（3）beanstalkd端口设置。允许192.168.142.166访问11300端口</span><span class="hljs-string"></span><span class="hljs-string">firewall-cmd --permanent --add-rich-rule="</span>rule <span class="hljs-attribute">family</span>=<span class="hljs-string">"ipv4"</span> source <span class="hljs-attribute">address</span>=<span class="hljs-string">"192.168.142.166"</span><span class="hljs-built_in"> port </span><span class="hljs-attribute">protocol</span>=<span class="hljs-string">"tcp"</span> <span class="hljs-attribute">port</span>=<span class="hljs-string">"11300"</span> accept<span class="hljs-string">"</span></code></pre><h1 id="3-重启防火墙，使配置生效"><a href="#3-重启防火墙，使配置生效" class="headerlink" title="3.重启防火墙，使配置生效"></a>3.重启防火墙，使配置生效</h1><pre><code class="hljs css"><span class="hljs-selector-tag">systemctl</span> <span class="hljs-selector-tag">restart</span> <span class="hljs-selector-tag">firewalld</span><span class="hljs-selector-class">.service</span></code></pre><h1 id="4-查看配置结果，验证配置"><a href="#4-查看配置结果，验证配置" class="headerlink" title="4.查看配置结果，验证配置"></a>4.查看配置结果，验证配置</h1><pre><code class="hljs dockerfile">firewall-<span class="hljs-keyword">cmd</span><span class="bash"> --list-all</span></code></pre><h1 id="5-删除规则"><a href="#5-删除规则" class="headerlink" title="5.删除规则"></a>5.删除规则</h1><p>示例：</p><pre><code class="hljs routeros">firewall-cmd --permanent <span class="hljs-attribute">--remove-rich-rule</span>=<span class="hljs-string">"rule family="</span>ipv4" source <span class="hljs-attribute">address</span>=<span class="hljs-string">"192.168.142.166"</span><span class="hljs-built_in"> port </span><span class="hljs-attribute">protocol</span>=<span class="hljs-string">"tcp"</span> <span class="hljs-attribute">port</span>=<span class="hljs-string">"11300"</span> accept<span class="hljs-string">"</span><span class="hljs-string">systemctl restart firewalld.service</span></code></pre>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>centos</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>CentOS 6.5 无界面安装 Oracle 11g R2</title>
     <link href="/2020/06/06/CentOS%20%E6%97%A0%E7%95%8C%E9%9D%A2%E5%AE%89%E8%A3%85%20Oracle%2011g%20R2/"/>
     <url>/2020/06/06/CentOS%20%E6%97%A0%E7%95%8C%E9%9D%A2%E5%AE%89%E8%A3%85%20Oracle%2011g%20R2/</url>
