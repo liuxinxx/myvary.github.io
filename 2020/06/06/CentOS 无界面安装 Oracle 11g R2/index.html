@@ -205,7 +205,7 @@
             
             <article class="markdown-body">
               <p>系统环境基于无外网和无图形化界面安装Oracle 11G。 <a id="more"></a></p>
-<h3 id="准备软件"><a href="#准备软件" class="headerlink" title="准备软件"></a>准备软件</h3><ul>
+<h2 id="准备软件"><a href="#准备软件" class="headerlink" title="准备软件"></a>准备软件</h2><ul>
 <li><p>XShell+Xftp：用于连接Linux系统的终端模拟工具和FTP传输工具</p>
 </li>
 <li><p>Oracle安装文件下载（Oracle Database 11g Release 2安装包文件总大小约2G）：<br><a href="http://www.oracle.com/technetwork/database/enterprise-edition/downloads/index.html" target="_blank" rel="noopener">http://www.oracle.com/technetwork/database/enterprise-edition/downloads/index.html</a><br>下载完毕后会有两个文件（我所安装的Linux服务器是64位）：</p>
@@ -214,7 +214,7 @@
 
 </li>
 </ul>
-<h3 id="检查系统配置"><a href="#检查系统配置" class="headerlink" title="检查系统配置"></a>检查系统配置</h3><p>Oracle Database 11g Release 2官方的系统配置要求如下：</p>
+<h2 id="检查系统配置"><a href="#检查系统配置" class="headerlink" title="检查系统配置"></a>检查系统配置</h2><p>Oracle Database 11g Release 2官方的系统配置要求如下：</p>
 <ul>
 <li>物理运行内存（Physical RAM）：1GB以上，推荐配置2GB以上<br>查看内存占用情况：<pre><code class="hljs cpp"><span class="hljs-built_in">free</span> -g</code></pre></li>
 <li>硬盘空间（Disk Space）：8GB以上，/tmp目录剩余空间在1GB以上<br>查看其他挂载区的目录使用情况：<pre><code class="hljs ebnf"><span class="hljs-attribute">df -h</span></code></pre></li>
@@ -228,7 +228,7 @@
 </li>
 </ul>
 <p>我所安装的服务器环境是 Red Hat Enterprise Linux 4</p>
-<h3 id="系统安装Oracle-11g-R2所必须的安装包"><a href="#系统安装Oracle-11g-R2所必须的安装包" class="headerlink" title="系统安装Oracle 11g R2所必须的安装包"></a>系统安装Oracle 11g R2所必须的安装包</h3><pre><code class="hljs angelscript">binutils<span class="hljs-number">-2.15</span><span class="hljs-number">.92</span><span class="hljs-number">.0</span><span class="hljs-number">.2</span>
+<h2 id="系统安装Oracle-11g-R2所必须的安装包"><a href="#系统安装Oracle-11g-R2所必须的安装包" class="headerlink" title="系统安装Oracle 11g R2所必须的安装包"></a>系统安装Oracle 11g R2所必须的安装包</h2><pre><code class="hljs angelscript">binutils<span class="hljs-number">-2.15</span><span class="hljs-number">.92</span><span class="hljs-number">.0</span><span class="hljs-number">.2</span>
 compat-libstdc++<span class="hljs-number">-33</span><span class="hljs-number">-3.2</span><span class="hljs-number">.3</span>
 elfutils-libelf<span class="hljs-number">-0.97</span>
 elfutils-libelf-devel<span class="hljs-number">-0.97</span>
@@ -256,7 +256,7 @@ sysstat<span class="hljs-number">-5.0</span><span class="hljs-number">.5</span><
 </li>
 <li><p>安装软件命令(具体安装顺序自己调配，不能用通配符批量安装，会出现依赖问题)：</p>
 <pre><code class="hljs css"><span class="hljs-selector-tag">rpm</span> <span class="hljs-selector-tag">-ivh</span> 软件名<span class="hljs-selector-class">.rpm</span></code></pre>
-<h3 id="配置内核参数和资源限制"><a href="#配置内核参数和资源限制" class="headerlink" title="配置内核参数和资源限制"></a>配置内核参数和资源限制</h3><p>使用vi编辑器对/etc/sysctl.conf文件进行编辑：</p>
+<h2 id="配置内核参数和资源限制"><a href="#配置内核参数和资源限制" class="headerlink" title="配置内核参数和资源限制"></a>配置内核参数和资源限制</h2><p>使用vi编辑器对/etc/sysctl.conf文件进行编辑：</p>
 <pre><code class="hljs vim"><span class="hljs-keyword">vi</span> /etc/sysctl.<span class="hljs-keyword">conf</span></code></pre>
 <p>文件末尾添加一下内容：</p>
 </li>
@@ -275,7 +275,7 @@ sysstat<span class="hljs-number">-5.0</span><span class="hljs-number">.5</span><
 <ul>
 <li><p>使内核参数生效，执行命令:</p>
 <pre><code class="hljs ebnf"><span class="hljs-attribute">sysctl -p</span></code></pre>
-<h3 id="创建Oracle相关用户"><a href="#创建Oracle相关用户" class="headerlink" title="创建Oracle相关用户"></a>创建Oracle相关用户</h3></li>
+<h2 id="创建Oracle相关用户"><a href="#创建Oracle相关用户" class="headerlink" title="创建Oracle相关用户"></a>创建Oracle相关用户</h2></li>
 <li><p>创建用户组oinstall：</p>
 <pre><code class="hljs angelscript">groupadd -g <span class="hljs-number">200</span> oinstall</code></pre></li>
 <li><p>创建用户组dba：</p>
@@ -288,13 +288,13 @@ sysstat<span class="hljs-number">-5.0</span><span class="hljs-number">.5</span><
 
 </li>
 </ul>
-<h3 id="修改登录系统参数"><a href="#修改登录系统参数" class="headerlink" title="修改登录系统参数"></a>修改登录系统参数</h3><ul>
+<h2 id="修改登录系统参数"><a href="#修改登录系统参数" class="headerlink" title="修改登录系统参数"></a>修改登录系统参数</h2><ul>
 <li>使用vi编辑器对/etc/pam.d/login文件进行编辑：<pre><code class="hljs awk">vi <span class="hljs-regexp">/etc/</span>pam.d<span class="hljs-regexp">/login</span></code></pre>
 在文件末尾添加:<pre><code class="hljs css"><span class="hljs-selector-tag">session</span> <span class="hljs-selector-tag">required</span> <span class="hljs-selector-tag">pam_limits</span><span class="hljs-selector-class">.so</span></code></pre>
 
 </li>
 </ul>
-<h3 id="修改Oracle软件安装用户的资源限制"><a href="#修改Oracle软件安装用户的资源限制" class="headerlink" title="修改Oracle软件安装用户的资源限制"></a>修改Oracle软件安装用户的资源限制</h3><ul>
+<h2 id="修改Oracle软件安装用户的资源限制"><a href="#修改Oracle软件安装用户的资源限制" class="headerlink" title="修改Oracle软件安装用户的资源限制"></a>修改Oracle软件安装用户的资源限制</h2><ul>
 <li>使用vi编辑器对/etc/security/limits.conf文件进行编辑：<pre><code class="hljs vim"><span class="hljs-keyword">vi</span> /etc/security/limits.<span class="hljs-keyword">conf</span></code></pre>
 在文件末尾添加:</li>
 </ul>
@@ -302,7 +302,7 @@ sysstat<span class="hljs-number">-5.0</span><span class="hljs-number">.5</span><
 oracle hard nproc <span class="hljs-number">16384</span>
 oracle soft nofile <span class="hljs-number">1024</span>
 oracle hard nofile <span class="hljs-number">65536</span></code></pre>
-<h3 id="修改环境变量文件"><a href="#修改环境变量文件" class="headerlink" title="修改环境变量文件"></a>修改环境变量文件</h3><ul>
+<h2 id="修改环境变量文件"><a href="#修改环境变量文件" class="headerlink" title="修改环境变量文件"></a>修改环境变量文件</h2><ul>
 <li>使用vi编辑器对/etc/profile文件进行编辑：<pre><code class="hljs routeros">vi /etc/profile
 在文件末尾添加：
 <span class="hljs-keyword">if</span> [ <span class="hljs-variable">$USER</span> = <span class="hljs-string">"oracle"</span> ]; then
@@ -314,7 +314,7 @@ ulimit -u 16384 -n 65536
 fi
 fi</code></pre></li>
 <li>更新配置文件更改：<pre><code class="hljs vim"><span class="hljs-keyword">source</span> <span class="hljs-keyword">profile</span></code></pre>
-<h3 id="创建目录并分配权限"><a href="#创建目录并分配权限" class="headerlink" title="创建目录并分配权限"></a>创建目录并分配权限</h3></li>
+<h2 id="创建目录并分配权限"><a href="#创建目录并分配权限" class="headerlink" title="创建目录并分配权限"></a>创建目录并分配权限</h2></li>
 <li>创建目录</li>
 </ul>
 <pre><code class="hljs arduino"><span class="hljs-built_in">mkdir</span> /oracle</code></pre>
@@ -341,7 +341,7 @@ umask 022
 <span class="hljs-builtin-name">export</span> <span class="hljs-attribute">ORACLE_SID</span>=orcl
 <span class="hljs-builtin-name">export</span> <span class="hljs-attribute">ORACLE_HOME</span>=<span class="hljs-variable">$ORACLE_BASE</span>/product/11.2.0/dbhome_1
 <span class="hljs-builtin-name">export</span> <span class="hljs-attribute">PATH</span>=<span class="hljs-variable">$PATH</span>:$ORACLE_HOME/bin:</code></pre>
-<h3 id="安装数据库"><a href="#安装数据库" class="headerlink" title="安装数据库"></a>安装数据库</h3><ul>
+<h2 id="安装数据库"><a href="#安装数据库" class="headerlink" title="安装数据库"></a>安装数据库</h2><ul>
 <li><p>Ctrl+D注销Oracle用户，切换成root用户</p>
 </li>
 <li><p>解压Oracle 11g R2 数据库压缩包（在本文我已经把数据库压缩包用FTP软件传输到/tmp目录下），执行命令：</p>
@@ -397,7 +397,7 @@ vi db_install.rsp</code></pre>
 </li>
 <li><p>安装监听,直接执行监听脚本:</p>
 <pre><code class="hljs jboss-cli">netca <span class="hljs-string">/silent</span> <span class="hljs-string">/responseFile</span> <span class="hljs-string">/home/oracle/netca.rsp</span></code></pre>
-<h3 id="安装数据库实例"><a href="#安装数据库实例" class="headerlink" title="安装数据库实例"></a>安装数据库实例</h3></li>
+<h2 id="安装数据库实例"><a href="#安装数据库实例" class="headerlink" title="安装数据库实例"></a>安装数据库实例</h2></li>
 <li><p>使用vi编辑配置文件dbca.rsp：</p>
 <pre><code class="hljs css"><span class="hljs-selector-tag">vi</span> <span class="hljs-selector-tag">dbca</span><span class="hljs-selector-class">.rsp</span></code></pre>
 <p>修改以下配置，后面5个都要删掉前面的#号改参数值:</p>
@@ -426,7 +426,7 @@ dbca -silent -responseFile ~<span class="hljs-string">/dbca.rsp</span></code></p
 <p>执行命令：</p>
 <pre><code class="hljs jboss-cli">dbca -silent -responseFile ~<span class="hljs-string">/dbca.rsp</span></code></pre>
 
-<h3 id="测试和修改Oracle用户密码有效期"><a href="#测试和修改Oracle用户密码有效期" class="headerlink" title="测试和修改Oracle用户密码有效期"></a>测试和修改Oracle用户密码有效期</h3><ul>
+<h2 id="测试和修改Oracle用户密码有效期"><a href="#测试和修改Oracle用户密码有效期" class="headerlink" title="测试和修改Oracle用户密码有效期"></a>测试和修改Oracle用户密码有效期</h2><ul>
 <li><p>执行命令：</p>
 <pre><code class="hljs jboss-cli">sqlplus <span class="hljs-string">/nolog</span></code></pre>
 </li>
@@ -439,7 +439,7 @@ dbca -silent -responseFile ~<span class="hljs-string">/dbca.rsp</span></code></p
 
 </li>
 </ul>
-<h4 id="附上一些命令查看Oracle端口和Oracle进程"><a href="#附上一些命令查看Oracle端口和Oracle进程" class="headerlink" title="附上一些命令查看Oracle端口和Oracle进程"></a>附上一些命令查看Oracle端口和Oracle进程</h4><ul>
+<h2 id="附上一些命令查看Oracle端口和Oracle进程"><a href="#附上一些命令查看Oracle端口和Oracle进程" class="headerlink" title="附上一些命令查看Oracle端口和Oracle进程"></a>附上一些命令查看Oracle端口和Oracle进程</h2><ul>
 <li><p>查看Oracle开放的1521端口号：</p>
 <pre><code class="hljs 1c">netstat -lnp<span class="hljs-string">|grep 1521</span></code></pre>
 </li>
@@ -459,7 +459,9 @@ dbca -silent -responseFile ~<span class="hljs-string">/dbca.rsp</span></code></p
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/oracle-centos/">oracle,centos</a>
+                      <a class="hover-with-bg" href="/tags/centos/">centos</a>
+                    
+                      <a class="hover-with-bg" href="/tags/oracle/">oracle</a>
                     
                   </div>
                 
