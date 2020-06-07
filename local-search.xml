@@ -50,6 +50,31 @@
   
   
   <entry>
+    <title>docker下安装Elasticsearch</title>
+    <link href="/2020/06/06/docker%E4%B8%8B%E5%AE%89%E8%A3%85elasticsearch/"/>
+    <url>/2020/06/06/docker%E4%B8%8B%E5%AE%89%E8%A3%85elasticsearch/</url>
+    
+    <content type="html"><![CDATA[<h1 id="1、查找elasticsearch版本"><a href="#1、查找elasticsearch版本" class="headerlink" title="1、查找elasticsearch版本"></a>1、查找elasticsearch版本</h1><pre><code class="hljs undefined">docker search elasticsearch</code></pre><h1 id="2、选择一个版本，拉取镜像（本次拉取是2-4-6）"><a href="#2、选择一个版本，拉取镜像（本次拉取是2-4-6）" class="headerlink" title="2、选择一个版本，拉取镜像（本次拉取是2.4.6）"></a>2、选择一个版本，拉取镜像（本次拉取是2.4.6）</h1><pre><code class="hljs css"><span class="hljs-selector-tag">docker</span> <span class="hljs-selector-tag">pull</span> <span class="hljs-selector-tag">elasticsearch</span><span class="hljs-selector-pseudo">:2.4.6</span></code></pre><p><img src="https://lxgj.oss-cn-beijing.aliyuncs.com/2501393-10a4fccad9fac142.png" srcset="/img/loading.gif" alt="img"></p><h1 id="3、查看镜像"><a href="#3、查看镜像" class="headerlink" title="3、查看镜像"></a>3、查看镜像</h1><pre><code class="hljs undefined">docker images</code></pre><p><img src="https://lxgj.oss-cn-beijing.aliyuncs.com/2501393-13d29ed982818185.webp" srcset="/img/loading.gif" alt=""></p><h1 id="4、通过镜像，启动一个容器，并将9200和9300端口映射到本机"><a href="#4、通过镜像，启动一个容器，并将9200和9300端口映射到本机" class="headerlink" title="4、通过镜像，启动一个容器，并将9200和9300端口映射到本机"></a>4、通过镜像，启动一个容器，并将9200和9300端口映射到本机</h1><pre><code class="hljs css"><span class="hljs-selector-tag">docker</span> <span class="hljs-selector-tag">run</span> <span class="hljs-selector-tag">-d</span> <span class="hljs-selector-tag">-p</span> 9200<span class="hljs-selector-pseudo">:9200</span> <span class="hljs-selector-tag">-p</span> 9300<span class="hljs-selector-pseudo">:9300</span> <span class="hljs-selector-tag">--name</span> <span class="hljs-selector-tag">elasticsearch</span> <span class="hljs-selector-tag">elasticsearch</span><span class="hljs-selector-pseudo">:2.4.6</span></code></pre><p><img src="https://lxgj.oss-cn-beijing.aliyuncs.com/2501393-55083cbe6ac8abc9.webp" srcset="/img/loading.gif" alt="img"></p><h1 id="5、查看已启动容器"><a href="#5、查看已启动容器" class="headerlink" title="5、查看已启动容器"></a>5、查看已启动容器</h1><pre><code class="hljs undefined">docker ps</code></pre><p><img src="https://lxgj.oss-cn-beijing.aliyuncs.com/2501393-611a5809e4c3125d.webp" srcset="/img/loading.gif" alt="img"><br> 验证是否安装成功？访问：(本机ip地址:9200)<br><a href="http://192.168.43.107:9200" target="_blank" rel="noopener">http://192.168.43.107:9200</a></p><p><img src="https://lxgj.oss-cn-beijing.aliyuncs.com/image-20200607170052643.png" srcset="/img/loading.gif" alt="image-20200607170052643"></p><h1 id="6、安装插件，先进入容器："><a href="#6、安装插件，先进入容器：" class="headerlink" title="6、安装插件，先进入容器："></a>6、安装插件，先进入容器：</h1><pre><code class="hljs bash">docker <span class="hljs-built_in">exec</span> -it elasticsearch /bin/bash</code></pre><p><img src="https://lxgj.oss-cn-beijing.aliyuncs.com/2501393-726d9ce61c0bb9f6.webp" srcset="/img/loading.gif" alt="img"></p><h1 id="7、进入容器bin目录，并执行安装插件命令："><a href="#7、进入容器bin目录，并执行安装插件命令：" class="headerlink" title="7、进入容器bin目录，并执行安装插件命令："></a>7、进入容器bin目录，并执行安装插件命令：</h1><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> binls plugin install mobz/elasticsearch-head</code></pre><p><img src="https://lxgj.oss-cn-beijing.aliyuncs.com/2501393-e1e4183306bbe066.webp" srcset="/img/loading.gif" alt="img"></p><p> 访问：<br><a href="http://192.168.43.107:9200/_plugin/head/" target="_blank" rel="noopener">http://192.168.43.107:9200/_plugin/head/</a></p><p><img src="https://lxgj.oss-cn-beijing.aliyuncs.com/2501393-14966cb3a67f4bd4.webp" srcset="/img/loading.gif" alt="img"><br>插件安装成功</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>centos</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>docker</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Rails 部署</title>
     <link href="/2020/06/05/Rails%20%E9%83%A8%E7%BD%B2/"/>
     <url>/2020/06/05/Rails%20%E9%83%A8%E7%BD%B2/</url>
