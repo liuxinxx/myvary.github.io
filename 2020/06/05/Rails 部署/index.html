@@ -1,223 +1,4 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-
-
-
-
-
-<head>
-  <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="/img/mac_blog.icns">
-  <link rel="icon" type="image/png" href="/img/win_blog.ico">
-  <meta name="viewport"
-        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
-  
-  <meta name="theme-color" content="#2f4154">
-  <meta name="description" content="">
-  <meta name="author" content="John Doe">
-  <meta name="keywords" content="">
-  <title>Rails 部署 - liuxin</title>
-
-  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
-
-
-  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
-  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
-
-  
-    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
-  
-
-  
-
-
-<!-- 主题依赖的图标库，不要自行修改 -->
-
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css">
-
-
-
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
-
-
-<link  rel="stylesheet" href="/css/main.css" />
-
-<!-- 自定义样式保持在最底部 -->
-
-
-  <script  src="/js/utils.js" ></script>
-<meta name="generator" content="Hexo 4.2.1"></head>
-
-
-<body>
-  <header style="height: 70vh;">
-    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
-  <div class="container">
-    <a class="navbar-brand"
-       href="/">&nbsp;<strong>liuxin's blog</strong>&nbsp;</a>
-
-    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
-            data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <div class="animated-icon"><span></span><span></span><span></span></div>
-    </button>
-
-    <!-- Collapsible content -->
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav ml-auto text-center">
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/">
-                <i class="iconfont icon-home-fill"></i>
-                首页
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/archives/">
-                <i class="iconfont icon-archive-fill"></i>
-                归档
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/categories/">
-                <i class="iconfont icon-category-fill"></i>
-                分类
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/tags/">
-                <i class="iconfont icon-tags-fill"></i>
-                标签
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/about/">
-                <i class="iconfont icon-user-fill"></i>
-                关于
-              </a>
-            </li>
-          
-        
-        
-          <li class="nav-item" id="search-btn">
-            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
-                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
-</nav>
-
-    <div class="view intro-2" id="background" parallax=true
-         style="background: url('https://lxgj.oss-cn-beijing.aliyuncs.com/blog_bg.jpg') no-repeat center center;
-           background-size: cover;">
-      <div class="full-bg-img">
-        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
-          <div class="container text-center white-text fadeInUp">
-            <span class="h2" id="subtitle">
-              
-            </span>
-
-            
-              
-  <div class="mt-3 post-meta">
-    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-    <time datetime="2020-06-05 17:37">
-      2020年6月5日 下午
-    </time>
-  </div>
-
-
-<div class="mt-1">
-  
-    
-    <span class="post-meta mr-2">
-      <i class="iconfont icon-chart"></i>
-      1.8k 字
-    </span>
-  
-
-  
-    
-    <span class="post-meta mr-2">
-      <i class="iconfont icon-clock-fill"></i>
-      
-      
-      29
-       分钟
-    </span>
-  
-
-  
-  
-</div>
-
-            
-          </div>
-
-          
-        </div>
-      </div>
-    </div>
-  </header>
-
-  <main>
-    
-      
-
-<div class="container-fluid">
-  <div class="row">
-    <div class="d-none d-lg-block col-lg-2"></div>
-    <div class="col-lg-8 nopadding-md">
-      <div class="container nopadding-md" id="board-ctn">
-        <div class="py-5" id="board">
-          <div class="post-content mx-auto" id="post">
-            
-            <article class="markdown-body">
-              <h3 id="添加新用户"><a href="#添加新用户" class="headerlink" title="添加新用户"></a>添加新用户</h3><blockquote>
-<p>在服务器添加一个新的用户，用户名为deploy<a href="">教程</a></p>
-</blockquote>
-<ul>
-<li><p>执行命令<code>adduser</code> </p>
-</li>
-<li><p>按提示输入密码</p>
-</li>
-<li><p>设置一些个人信息，可以直接按enter键，设为空</p>
-</li>
-<li><p>添加权限</p>
-<a id="more"></a>
-<p>在root用户下，打开<code>/etc/sudoers</code>文件</p>
-<pre><code class="hljs shell"><span class="hljs-meta">#</span>
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><link rel="apple-touch-icon" sizes="76x76" href="/img/mac_blog.icns"><link rel="icon" type="image/png" href="/img/win_blog.ico"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,shrink-to-fit=no"><meta http-equiv="x-ua-compatible" content="ie=edge"><meta name="theme-color" content="#2f4154"><meta name="description" content=""><meta name="author" content="John Doe"><meta name="keywords" content=""><title>Rails 部署 - liuxin</title><link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css"><link rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css"><link rel="stylesheet" href="/lib/hint/hint.min.css"><link rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css"><link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css"><link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css"><link rel="stylesheet" href="/css/main.css"><script src="/js/utils.js"></script><meta name="generator" content="Hexo 4.2.1"></head><body><header style="height:70vh"><nav id="navbar" class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar"><div class="container"><a class="navbar-brand" href="/">&nbsp;<strong>liuxin's blog</strong>&nbsp;</a> <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><div class="animated-icon"><span></span><span></span><span></span></div></button><div class="collapse navbar-collapse" id="navbarSupportedContent"><ul class="navbar-nav ml-auto text-center"><li class="nav-item"><a class="nav-link" href="/"><i class="iconfont icon-home-fill"></i> 首页</a></li><li class="nav-item"><a class="nav-link" href="/archives/"><i class="iconfont icon-archive-fill"></i> 归档</a></li><li class="nav-item"><a class="nav-link" href="/categories/"><i class="iconfont icon-category-fill"></i> 分类</a></li><li class="nav-item"><a class="nav-link" href="/tags/"><i class="iconfont icon-tags-fill"></i> 标签</a></li><li class="nav-item"><a class="nav-link" href="/about/"><i class="iconfont icon-user-fill"></i> 关于</a></li><li class="nav-item" id="search-btn"><a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i class="iconfont icon-search"></i>&nbsp;&nbsp;</a></li></ul></div></div></nav><div class="view intro-2" id="background" parallax="true" style="background:url(https://lxgj.oss-cn-beijing.aliyuncs.com/blog_bg.jpg) no-repeat center center;background-size:cover"><div class="full-bg-img"><div class="mask flex-center" style="background-color:rgba(0,0,0,.3)"><div class="container text-center white-text fadeInUp"><span class="h2" id="subtitle"></span><div class="mt-3 post-meta"><i class="iconfont icon-date-fill" aria-hidden="true"></i> <time datetime="2020-06-05 17:37">2020年6月5日 下午</time></div><div class="mt-1"><span class="post-meta mr-2"><i class="iconfont icon-chart"></i> 1.7k 字 </span><span class="post-meta mr-2"><i class="iconfont icon-clock-fill"></i> 29 分钟</span></div></div></div></div></div></header><main><div class="container-fluid"><div class="row"><div class="d-none d-lg-block col-lg-2"></div><div class="col-lg-8 nopadding-md"><div class="container nopadding-md" id="board-ctn"><div class="py-5" id="board"><div class="post-content mx-auto" id="post"><article class="markdown-body"><h3 id="添加新用户"><a href="#添加新用户" class="headerlink" title="添加新用户"></a>添加新用户</h3><blockquote><p>在服务器添加一个新的用户，用户名为deploy<a href="">教程</a></p></blockquote><ul><li><p>执行命令<code>adduser</code></p></li><li><p>按提示输入密码</p></li><li><p>设置一些个人信息，可以直接按enter键，设为空</p></li><li><p>添加权限</p><a id="more"></a><p>在root用户下，打开<code>/etc/sudoers</code>文件</p><pre><code class="hljs shell"><span class="hljs-meta">#</span>
 <span class="hljs-meta">#</span><span class="bash"> This file MUST be edited with the <span class="hljs-string">'visudo'</span> <span class="hljs-built_in">command</span> as root.</span>
 <span class="hljs-meta">#</span>
 <span class="hljs-meta">#</span><span class="bash"> Please consider adding <span class="hljs-built_in">local</span> content <span class="hljs-keyword">in</span> /etc/sudoers.d/ instead of</span>
@@ -247,13 +28,7 @@ deploy  ALL=(ALL:ALL) ALL # 添加这一行，使deploy具有使用sudo的权限
 
 <span class="hljs-meta">#</span><span class="bash"> See sudoers(5) <span class="hljs-keyword">for</span> more information on <span class="hljs-string">"#include"</span> directives:</span>
 
-<span class="hljs-meta">#</span><span class="bash">includedir /etc/sudoers.d</span></code></pre>
-
-</li>
-</ul>
-<h3 id="ruby安装"><a href="#ruby安装" class="headerlink" title="ruby安装"></a>ruby安装</h3><ul>
-<li><p>安装<code>rbenv</code>  <a href="https://ruby-china.org/wiki/rbenv-guide" target="_blank" rel="noopener">教程来源</a><br><code>sudo deploy</code>回到deploy下</p>
-<pre><code class="hljs shell">git clone https://github.com/rbenv/rbenv.git ~/.rbenv
+<span class="hljs-meta">#</span><span class="bash">includedir /etc/sudoers.d</span></code></pre></li></ul><h3 id="ruby安装"><a href="#ruby安装" class="headerlink" title="ruby安装"></a>ruby安装</h3><ul><li><p>安装<code>rbenv</code> <a href="https://ruby-china.org/wiki/rbenv-guide" target="_blank" rel="noopener">教程来源</a><br><code>sudo deploy</code>回到deploy下</p><pre><code class="hljs shell">git clone https://github.com/rbenv/rbenv.git ~/.rbenv
 <span class="hljs-meta">#</span><span class="bash"> 用来编译安装 ruby</span>
 git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
 <span class="hljs-meta">#</span><span class="bash"> 用来管理 gemset, 可选, 因为有 bundler 也没什么必要</span>
@@ -261,97 +36,32 @@ git clone git://github.com/jamis/rbenv-gemset.git  ~/.rbenv/plugins/rbenv-gemset
 <span class="hljs-meta">#</span><span class="bash"> 通过 rbenv update 命令来更新 rbenv 以及所有插件, 推荐</span>
 git clone git://github.com/rkh/rbenv-update.git ~/.rbenv/plugins/rbenv-update
 <span class="hljs-meta">#</span><span class="bash"> 使用 Ruby China 的镜像安装 Ruby, 国内用户推荐</span>
-git clone git://github.com/AndorChen/rbenv-china-mirror.git ~/.rbenv/plugins/rbenv-china-mirror</code></pre>
-
-<p>然后把下面的代码放到 <code>~/.bashrc</code> 里</p>
-<pre><code class="hljs shell">export PATH="$HOME/.rbenv/bin:$PATH"
-eval "$(rbenv init -)"</code></pre>
-
-<p>然后重开一个终端就可以执行 rbenv 了.</p>
-</li>
-<li><p>安装ruby</p>
-<pre><code class="hljs shell">rbenv install --list  # 列出所有 ruby 版本
-rbenv install 2.5.0     # 安装 2.5.0</code></pre>
-
-<p>安转过程可能出现缺少依赖的错误，可参考<a href="https://gist.github.com/sandyxu/8aceec7e436a6ab9621f" target="_blank" rel="noopener">这篇文章解决</a><br>一般解决办法:</p>
-<pre><code class="hljs shell">sudo apt-get install autoconf bison build-essential libssl-dev libyaml-dev libreadline6 libreadline6-dev zlib1g zlib1g-dev</code></pre>
-</li>
-<li><p>验证安装是否成功</p>
-<pre><code class="hljs shell">rbenv versions               # 列出安装的版本
-rbenv version                # 列出正在使用的版本</code></pre>
-</li>
-<li><p>设置版本</p>
-<pre><code class="hljs shell">rbenv global 2.5.0      # 默认使用 2.5.0
+git clone git://github.com/AndorChen/rbenv-china-mirror.git ~/.rbenv/plugins/rbenv-china-mirror</code></pre><p>然后把下面的代码放到 <code>~/.bashrc</code> 里</p><pre><code class="hljs shell">export PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init -)"</code></pre><p>然后重开一个终端就可以执行 rbenv 了.</p></li><li><p>安装ruby</p><pre><code class="hljs shell">rbenv install --list  # 列出所有 ruby 版本
+rbenv install 2.5.0     # 安装 2.5.0</code></pre><p>安转过程可能出现缺少依赖的错误，可参考<a href="https://gist.github.com/sandyxu/8aceec7e436a6ab9621f" target="_blank" rel="noopener">这篇文章解决</a><br>一般解决办法:</p><pre><code class="hljs shell">sudo apt-get install autoconf bison build-essential libssl-dev libyaml-dev libreadline6 libreadline6-dev zlib1g zlib1g-dev</code></pre></li><li><p>验证安装是否成功</p><pre><code class="hljs shell">rbenv versions               # 列出安装的版本
+rbenv version                # 列出正在使用的版本</code></pre></li><li><p>设置版本</p><pre><code class="hljs shell">rbenv global 2.5.0      # 默认使用 2.5.0
 rbenv shell 2.5.0       # 当前的 shell 使用 2.5.0, 会设置一个 `RBENV_VERSION` 环境变量
-rbenv local jruby-1.7.3      # 当前目录使用 jruby-1.7.3, 会生成一个 `.rbenv-version` 文件</code></pre>
-</li>
-<li><p>last</p>
-<pre><code class="hljs shell">rbenv rehash                 # 每当切换 ruby 版本和执行 bundle install 之后必须执行这个命令
+rbenv local jruby-1.7.3      # 当前目录使用 jruby-1.7.3, 会生成一个 `.rbenv-version` 文件</code></pre></li><li><p>last</p><pre><code class="hljs shell">rbenv rehash                 # 每当切换 ruby 版本和执行 bundle install 之后必须执行这个命令
 rbenv which irb              # 列出 irb 这个命令的完整路径
-rbenv whence irb             # 列出包含 irb 这个命令的版本</code></pre>
-</li>
-<li><p>安装<code>bundle</code></p>
-<pre><code class="hljs shell">gem install bundle</code></pre>
-</li>
-<li><p>安装<code>rails</code></p>
-<pre><code class="hljs shell">gem install rails</code></pre>
-</li>
-<li><p>安装nodejs</p>
-<pre><code class="hljs shell">sudo apt install nodejs</code></pre>
-
-</li>
-</ul>
-<h3 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h3><p>  使用postgresql数据库<a href="https://www.postgresql.org/download/linux/ubuntu/" target="_blank" rel="noopener">教程来源</a></p>
-<pre><code class="hljs shell">sudo apt-get install postgresql</code></pre>
-
-<ul>
-<li><p>新建数据库用户</p>
-<pre><code class="hljs shell">sudo -i -u postgres  //切换到数据库的超级管理员
+rbenv whence irb             # 列出包含 irb 这个命令的版本</code></pre></li><li><p>安装<code>bundle</code></p><pre><code class="hljs shell">gem install bundle</code></pre></li><li><p>安装<code>rails</code></p><pre><code class="hljs shell">gem install rails</code></pre></li><li><p>安装nodejs</p><pre><code class="hljs shell">sudo apt install nodejs</code></pre></li></ul><h3 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h3><p>使用postgresql数据库<a href="https://www.postgresql.org/download/linux/ubuntu/" target="_blank" rel="noopener">教程来源</a></p><pre><code class="hljs shell">sudo apt-get install postgresql</code></pre><ul><li><p>新建数据库用户</p><pre><code class="hljs shell">sudo -i -u postgres  //切换到数据库的超级管理员
 psql                 //进入数据库控制台
 create user deploy with password 'xxxx'; //新建一个deploy用户，密码是xxx
 alter role deploy with createdb; //使deploy用户具有创建数据库的权限
-alter role deploy with login；//使deploy用户具有登录数据库的权限</code></pre>
-</li>
-<li><p>注意：</p>
-<p>在后面安装pg gem时，可能会出现<code>You need to install postgresql-server-dev-X.Y for building a server-side extension or libpq-dev for building a client-side applic
-ation</code>错误,依次执行：</p>
-<pre><code class="hljs shell">sudo apt-get install python-psycopg2
-sudo apt-get install libpq-dev</code></pre>
-
-</li>
-</ul>
-<h3 id="nginx-passenger-安装"><a href="#nginx-passenger-安装" class="headerlink" title="nginx passenger 安装"></a>nginx passenger 安装</h3><p>  <a href="https://www.phusionpassenger.com/library/install/nginx/install/oss/xenial/" target="_blank" rel="noopener">这里很详细了</a></p>
-<pre><code class="hljs shell">sudo apt-get install -y dirmngr gnupg
+alter role deploy with login；//使deploy用户具有登录数据库的权限</code></pre></li><li><p>注意：</p><p>在后面安装pg gem时，可能会出现<code>You need to install postgresql-server-dev-X.Y for building a server-side extension or libpq-dev for building a client-side applic ation</code>错误,依次执行：</p><pre><code class="hljs shell">sudo apt-get install python-psycopg2
+sudo apt-get install libpq-dev</code></pre></li></ul><h3 id="nginx-passenger-安装"><a href="#nginx-passenger-安装" class="headerlink" title="nginx passenger 安装"></a>nginx passenger 安装</h3><p><a href="https://www.phusionpassenger.com/library/install/nginx/install/oss/xenial/" target="_blank" rel="noopener">这里很详细了</a></p><pre><code class="hljs shell">sudo apt-get install -y dirmngr gnupg
 sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 561F9B9CAC40B2F7
 sudo apt-get install -y apt-transport-https ca-certificates
 sudo sh -c 'echo deb https://oss-binaries.phusionpassenger.com/apt/passenger xenial main &gt; /etc/apt/sources.list.d/passenger.list'
 sudo apt-get update
-sudo apt-get install -y nginx-extras passenger</code></pre>
-
-<ul>
-<li><p>passenger的配置</p>
-<p>nginx安装以后，打开<code>/etc/nginx/passenger.conf</code>会看到</p>
-<pre><code class="hljs conf">passenger_root &#x2F;usr&#x2F;lib&#x2F;ruby&#x2F;vendor_ruby&#x2F;phusion_passenger&#x2F;locations.ini;
-passenger_ruby &#x2F;home&#x2F;deploy&#x2F;.rbenv&#x2F;shims&#x2F;ruby; &#x2F;&#x2F;这里需要修改ruby的安装路径</code></pre>
-
-<p><code>which ruby</code> 可以查看ruby的路径</p>
-</li>
-</ul>
-<h3 id="Capistrano配置原文教程"><a href="#Capistrano配置原文教程" class="headerlink" title="Capistrano配置原文教程"></a>Capistrano配置<a href="https://ruby-china.org/topics/18616" target="_blank" rel="noopener">原文教程</a></h3><ul>
-<li><p>安装必要的包</p>
-<pre><code class="hljs ruby">group <span class="hljs-symbol">:development</span> <span class="hljs-keyword">do</span>
+sudo apt-get install -y nginx-extras passenger</code></pre><ul><li><p>passenger的配置</p><p>nginx安装以后，打开<code>/etc/nginx/passenger.conf</code>会看到</p><pre><code class="hljs conf">passenger_root &#x2F;usr&#x2F;lib&#x2F;ruby&#x2F;vendor_ruby&#x2F;phusion_passenger&#x2F;locations.ini;
+passenger_ruby &#x2F;home&#x2F;deploy&#x2F;.rbenv&#x2F;shims&#x2F;ruby; &#x2F;&#x2F;这里需要修改ruby的安装路径</code></pre><p><code>which ruby</code> 可以查看ruby的路径</p></li></ul><h3 id="Capistrano配置原文教程"><a href="#Capistrano配置原文教程" class="headerlink" title="Capistrano配置原文教程"></a>Capistrano配置<a href="https://ruby-china.org/topics/18616" target="_blank" rel="noopener">原文教程</a></h3><ul><li><p>安装必要的包</p><pre><code class="hljs ruby">group <span class="hljs-symbol">:development</span> <span class="hljs-keyword">do</span>
 gem <span class="hljs-string">'capistrano'</span>
 gem <span class="hljs-string">'capistrano-bundler'</span>
 gem <span class="hljs-string">'capistrano-rails'</span>
 gem <span class="hljs-string">'capistrano-rbenv'</span>
 <span class="hljs-comment"># Add this if you're using rvm</span>
 <span class="hljs-comment"># gem 'capistrano-rvm'</span>
-<span class="hljs-keyword">end</span></code></pre>
-</li>
-<li><p><code>cap install</code></p>
-</li>
-<li><p>我的capfile文件</p>
-<pre><code class="hljs ruby"><span class="hljs-comment"># Load DSL and set up stages</span>
+<span class="hljs-keyword">end</span></code></pre></li><li><p><code>cap install</code></p></li><li><p>我的capfile文件</p><pre><code class="hljs ruby"><span class="hljs-comment"># Load DSL and set up stages</span>
 <span class="hljs-keyword">require</span> <span class="hljs-string">"capistrano/setup"</span>
 
 <span class="hljs-comment"># Include default deployment tasks</span>
@@ -390,10 +100,7 @@ set <span class="hljs-symbol">:rbenv_type</span>, <span class="hljs-symbol">:use
 set <span class="hljs-symbol">:rbenv_ruby</span>, <span class="hljs-string">'2.5.0'</span>
 
 <span class="hljs-comment"># Load custom tasks from `lib/capistrano/tasks` if you have any defined</span>
-Dir.glob(<span class="hljs-string">"lib/capistrano/tasks/*.rake"</span>).each &#123; <span class="hljs-params">|r|</span> import r &#125;</code></pre>
-
-<p>我的deploy.rb文件</p>
-<pre><code class="hljs ruby"><span class="hljs-comment"># config valid for current version and patch releases of Capistrano</span>
+Dir.glob(<span class="hljs-string">"lib/capistrano/tasks/*.rake"</span>).each &#123; <span class="hljs-params">|r|</span> import r &#125;</code></pre><p>我的deploy.rb文件</p><pre><code class="hljs ruby"><span class="hljs-comment"># config valid for current version and patch releases of Capistrano</span>
 lock <span class="hljs-string">"~&gt; 3.10.2"</span>
 
 set <span class="hljs-symbol">:application</span>, <span class="hljs-string">"script_blog"</span>
@@ -431,28 +138,14 @@ append <span class="hljs-symbol">:linked_dirs</span>, <span class="hljs-string">
 <span class="hljs-comment"># set :keep_releases, 5</span>
 
 <span class="hljs-comment"># Uncomment the following to require manually verifying the host key before first deploy.</span>
-<span class="hljs-comment"># set :ssh_options, verify_host_key: :secure</span></code></pre>
-
-<p>注意<code>append :linked_files, &quot;config/database.yml&quot;,&quot;config/secrets.yml&quot;</code> </p>
-<p><code>database.yml</code>和<code>secrets.yml</code>是手动在,<code>share/config/</code>目录下新建的，一个是连接数据库的相关信息，一个是安全验证相关信息。我的部署目录是<code>scriot_blog/</code> 就新建  <code>script_blog/share/config/</code> 目录</p>
-<p>同时新建以上两个文件。</p>
-<p>database.yml</p>
-<pre><code class="hljs yml"><span class="hljs-attr">production:</span>
+<span class="hljs-comment"># set :ssh_options, verify_host_key: :secure</span></code></pre><p>注意<code>append :linked_files, &quot;config/database.yml&quot;,&quot;config/secrets.yml&quot;</code></p><p><code>database.yml</code>和<code>secrets.yml</code>是手动在,<code>share/config/</code>目录下新建的，一个是连接数据库的相关信息，一个是安全验证相关信息。我的部署目录是<code>scriot_blog/</code> 就新建 <code>script_blog/share/config/</code> 目录</p><p>同时新建以上两个文件。</p><p>database.yml</p><pre><code class="hljs yml"><span class="hljs-attr">production:</span>
 <span class="hljs-attr">adapter:</span> <span class="hljs-string">postgresql</span>
 <span class="hljs-attr">pool:</span> &lt;%=<span class="ruby"> ENV.fetch(<span class="hljs-string">"RAILS_MAX_THREADS"</span>) &#123; <span class="hljs-number">5</span> &#125; </span>%&gt;
 <span class="hljs-attr">timeout:</span> <span class="hljs-number">5000</span>
 <span class="hljs-attr">database:</span> <span class="hljs-string">production_blog</span>
 <span class="hljs-attr">username:</span> <span class="hljs-string">'xxx'</span>
-<span class="hljs-attr">password:</span> <span class="hljs-string">'xxx'</span></code></pre>
-
-<p>secrets.yml</p>
-<pre><code class="hljs yml"><span class="hljs-attr">production:</span>
-<span class="hljs-attr">secret_key_base:</span> <span class="hljs-string">xxxxxx</span></code></pre>
-
-<p>其中<code>secret_key_base</code>的值是在本地项目下 执行<code>rake secret</code> 命令生成的。</p>
-</li>
-<li><p>deploy/production.rb</p>
-<pre><code class="hljs ruby"><span class="hljs-comment"># server-based syntax</span>
+<span class="hljs-attr">password:</span> <span class="hljs-string">'xxx'</span></code></pre><p>secrets.yml</p><pre><code class="hljs yml"><span class="hljs-attr">production:</span>
+<span class="hljs-attr">secret_key_base:</span> <span class="hljs-string">xxxxxx</span></code></pre><p>其中<code>secret_key_base</code>的值是在本地项目下 执行<code>rake secret</code> 命令生成的。</p></li><li><p>deploy/production.rb</p><pre><code class="hljs ruby"><span class="hljs-comment"># server-based syntax</span>
 <span class="hljs-comment"># ======================</span>
 <span class="hljs-comment"># Defines a single server with a list of roles and multiple properties.</span>
 <span class="hljs-comment"># You can define all roles on a single server, or split them:</span>
@@ -504,234 +197,7 @@ set <span class="hljs-symbol">:ssh_options</span>, &#123;
 <span class="hljs-comment">#     forward_agent: false,</span>
 <span class="hljs-comment">#     auth_methods: %w(publickey password)</span>
 <span class="hljs-comment">#     # password: "please use keys"</span>
-<span class="hljs-comment">#   &#125;</span></code></pre>
-
-</li>
-</ul>
-<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>  本地执行<code>cap production deploy</code></p>
-
-            </article>
-            <hr>
-            <div>
-              <div class="post-metas mb-3">
-                
-                  <div class="post-meta mr-3">
-                    <i class="iconfont icon-category"></i>
-                    
-                      <a class="hover-with-bg" href="/categories/ruby/">ruby</a>
-                    
-                  </div>
-                
-                
-                  <div class="post-meta">
-                    <i class="iconfont icon-tags"></i>
-                    
-                      <a class="hover-with-bg" href="/tags/rails/">rails</a>
-                    
-                  </div>
-                
-              </div>
-              
-                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
-              
-              
-                <div class="post-prevnext row">
-                  <div class="post-prev col-6">
-                    
-                    
-                      <a href="/2020/06/06/CentOS%20%E6%97%A0%E7%95%8C%E9%9D%A2%E5%AE%89%E8%A3%85%20Oracle%2011g%20R2/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">CentOS 6.5 无界面安装 Oracle 11g R2</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
-                  </div>
-                  <div class="post-next col-6">
-                    
-                    
-                      <a href="/2020/06/05/hello-world/">
-                        <span class="hidden-mobile">Hello World</span>
-                        <span class="visible-mobile">下一篇</span>
-                        <i class="iconfont icon-arrowright"></i>
-                      </a>
-                    
-                  </div>
-                </div>
-              
-            </div>
-
-            
-          </div>
-        </div>
-      </div>
-    </div>
-    
-      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
-        <div id="toc">
-  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
-  <div id="tocbot"></div>
-</div>
-
-      </div>
-    
-  </div>
-</div>
-
-<!-- Custom -->
-
-
-    
-  </main>
-
-  
-    <a id="scroll-top-button" href="#" role="button">
-      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
-    </a>
-  
-
-  
-    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
-     aria-hidden="true">
-  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header text-center">
-        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
-        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body mx-3">
-        <div class="md-form mb-5">
-          <input type="text" id="local-search-input" class="form-control validate">
-          <label data-error="x" data-success="v"
-                 for="local-search-input">关键词</label>
-        </div>
-        <div class="list-group" id="local-search-result"></div>
-      </div>
-    </div>
-  </div>
-</div>
-  
-
-  
-
-  
-
-  <footer class="mt-5">
-  <div class="text-center py-3">
-    <div>
-      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
-      <i class="iconfont icon-love"></i>
-      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
-        <span>Fluid</span></a>
-    </div>
-    
-  <div class="statistics">
-    
-    
-
-    
-      
-        <!-- LeanCloud 统计PV -->
-        <span id="leancloud-site-pv-container" style="display: none">
-            总访问量 
-            <span id="leancloud-site-pv"></span>
-             次
-          </span>
-      
-      
-        <!-- LeanCloud 统计UV -->
-        <span id="leancloud-site-uv-container" style="display: none">
-            总访客数 
-            <span id="leancloud-site-uv"></span>
-             人
-          </span>
-      
-
-    
-  </div>
-
-
-    
-
-    
-  </div>
-</footer>
-
-<!-- SCRIPTS -->
-<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
-<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
-<script  src="/js/debouncer.js" ></script>
-<script  src="/js/main.js" ></script>
-
-<!-- Plugins -->
-
-
-  
-    <script  src="/js/lazyload.js" ></script>
-  
-
-
-
-  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
-  <script  src="/js/clipboard-use.js" ></script>
-
-
-
-
-
-
-
-  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
-  <script>
-    $(document).ready(function () {
-      var boardCtn = $('#board-ctn');
-      var boardTop = boardCtn.offset().top;
-
-      tocbot.init({
-        tocSelector: '#tocbot',
-        contentSelector: 'article.markdown-body',
-        headingSelector: 'h1,h2,h3,h4,h5,h6',
-        linkClass: 'tocbot-link',
-        activeLinkClass: 'tocbot-active-link',
-        listClass: 'tocbot-list',
-        isCollapsedClass: 'tocbot-is-collapsed',
-        collapsibleClass: 'tocbot-is-collapsible',
-        collapseDepth: 0,
-        scrollSmooth: true,
-        headingsOffset: -boardTop
-      });
-      if ($('.toc-list-item').length > 0) {
-        $('#toc').css('visibility', 'visible');
-      }
-    });
-  </script>
-
-
-
-  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
-  <script>
-    var typed = new Typed('#subtitle', {
-      strings: [
-        '  ',
-        "Rails 部署&nbsp;",
-      ],
-      cursorChar: "_",
-      typeSpeed: 70,
-      loop: false,
-    });
-    typed.stop();
-    $(document).ready(function () {
-      $(".typed-cursor").addClass("h2");
-      typed.start();
-    });
-  </script>
-
-
-
-  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
-  <script>
-    anchors.options = {
+<span class="hljs-comment">#   &#125;</span></code></pre></li></ul><h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>本地执行<code>cap production deploy</code></p></article><hr><div><div class="post-metas mb-3"><div class="post-meta mr-3"><i class="iconfont icon-category"></i> <a class="hover-with-bg" href="/categories/ruby/">ruby</a></div><div class="post-meta"><i class="iconfont icon-tags"></i> <a class="hover-with-bg" href="/tags/rails/">rails</a></div></div><p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p><div class="post-prevnext row"><div class="post-prev col-6"><a href="/2020/06/06/CentOS%20%E6%97%A0%E7%95%8C%E9%9D%A2%E5%AE%89%E8%A3%85%20Oracle%2011g%20R2/"><i class="iconfont icon-arrowleft"></i> <span class="hidden-mobile">CentOS 6.5 无界面安装 Oracle 11g R2</span> <span class="visible-mobile">上一篇</span></a></div><div class="post-next col-6"><a href="/2020/06/05/hello-world/"><span class="hidden-mobile">Hello World</span> <span class="visible-mobile">下一篇</span> <i class="iconfont icon-arrowright"></i></a></div></div></div></div></div></div></div><div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn"><div id="toc"><p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p><div id="tocbot"></div></div></div></div></div></main><a id="scroll-top-button" href="#" role="button"><i class="iconfont icon-arrowup" aria-hidden="true"></i></a><div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable modal-lg" role="document"><div class="modal-content"><div class="modal-header text-center"><h4 class="modal-title w-100 font-weight-bold">搜索</h4><button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button></div><div class="modal-body mx-3"><div class="md-form mb-5"><input type="text" id="local-search-input" class="form-control validate"> <label data-error="x" data-success="v" for="local-search-input">关键词</label></div><div class="list-group" id="local-search-result"></div></div></div></div></div><footer class="mt-5"><div class="text-center py-3"><div><a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a></div><div class="statistics"><span id="leancloud-site-pv-container" style="display:none">总访问量 <span id="leancloud-site-pv"></span> 次 </span><span id="leancloud-site-uv-container" style="display:none">总访客数 <span id="leancloud-site-uv"></span> 人</span></div></div></footer><script src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js"></script><script src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js"></script><script src="/js/debouncer.js"></script><script src="/js/main.js"></script><script src="/js/lazyload.js"></script><script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js"></script><script src="/js/clipboard-use.js"></script><script src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js"></script><script>$(document).ready(function(){var t=$("#board-ctn").offset().top;tocbot.init({tocSelector:"#tocbot",contentSelector:"article.markdown-body",headingSelector:"h1,h2,h3,h4,h5,h6",linkClass:"tocbot-link",activeLinkClass:"tocbot-active-link",listClass:"tocbot-list",isCollapsedClass:"tocbot-is-collapsed",collapsibleClass:"tocbot-is-collapsible",collapseDepth:0,scrollSmooth:!0,headingsOffset:-t}),0<$(".toc-list-item").length&&$("#toc").css("visibility","visible")})</script><script src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js"></script><script>var typed=new Typed("#subtitle",{strings:["  ","Rails 部署&nbsp;"],cursorChar:"_",typeSpeed:70,loop:!1});typed.stop(),$(document).ready(function(){$(".typed-cursor").addClass("h2"),typed.start()})</script><script src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js"></script><script>anchors.options = {
       placement: "right",
       visible: "hover",
       
@@ -741,55 +207,4 @@ set <span class="hljs-symbol">:ssh_options</span>, &#123;
     for (item of el) {
       res.push(".markdown-body > " + item)
     }
-    anchors.add(res.join(", "))
-  </script>
-
-
-
-  <script  src="/js/local-search.js" ></script>
-  <script>
-    var path = "/local-search.xml";
-    var inputArea = document.querySelector("#local-search-input");
-    inputArea.onclick = function () {
-      searchFunc(path, 'local-search-input', 'local-search-result');
-      this.onclick = null
-    }
-  </script>
-
-
-
-  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
-  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
-
-  <script>
-    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
-      function () {
-        var element = document.createElement('a');
-        $(element).attr('data-fancybox', 'images');
-        $(element).attr('href', $(this).attr('src'));
-        $(this).wrap(element);
-      }
-    );
-  </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-</body>
-</html>
+    anchors.add(res.join(", "))</script><script src="/js/local-search.js"></script><script>var path="/local-search.xml",inputArea=document.querySelector("#local-search-input");inputArea.onclick=function(){searchFunc(path,"local-search-input","local-search-result"),this.onclick=null}</script><script src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js"></script><link rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css"><script>$("#post img:not(.no-zoom img, img[no-zoom]), img[zoom]").each(function(){var t=document.createElement("a");$(t).attr("data-fancybox","images"),$(t).attr("href",$(this).attr("src")),$(this).wrap(t)})</script></body></html>
