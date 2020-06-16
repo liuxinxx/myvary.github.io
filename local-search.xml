@@ -4,6 +4,25 @@
   
   
   <entry>
+    <title>logrotate切割日志</title>
+    <link href="/posts/e73a6447.html"/>
+    <url>/posts/e73a6447.html</url>
+    
+    <content type="html"><![CDATA[<p>编辑/etc/rsyslog.conf ，加入以下内容，将日志保存在以下路径</p><pre><code class="hljs lasso">local4.*           /<span class="hljs-built_in">var</span>/<span class="hljs-keyword">log</span>/ldap/openldap.<span class="hljs-keyword">log</span></code></pre><p>重启rsyslog服务</p><pre><code class="hljs awk"><span class="hljs-regexp">/etc/i</span>nit.d<span class="hljs-regexp">/rsyslog  restart</span></code></pre><p>由于openldap日志会越来越大，所以需要logrotate进行日志切割。</p><p>创建一个配置文件</p><pre><code class="hljs awk"><span class="hljs-regexp">/etc/</span>logrotate.d<span class="hljs-regexp">/slapd</span></code></pre><p>内容如下</p><pre><code class="hljs dts"> <span class="hljs-meta-keyword">/var/</span>log<span class="hljs-meta-keyword">/ldap/</span>openldap.<span class="hljs-class">log </span>&#123;    daily         <span class="hljs-meta">#每天轮询一次日志</span>    rotate <span class="hljs-number">5</span>      <span class="hljs-meta">#存储5个日志，超过该数目后的日志将被删除</span>    copytruncate  <span class="hljs-meta">#复制原日志内容后，将原日志清空，而不创建新文件</span>    nocompress    <span class="hljs-meta">#切割时不压缩</span>    dateext       <span class="hljs-meta">#切割时文件名带有日期</span>    missingok     <span class="hljs-meta">#如果指定的目录不存在，logrotate会报错，此项用来关闭报错</span>&#125;</code></pre><p>测试配置是否有问题</p><pre><code class="hljs awk">logrotate -f <span class="hljs-regexp">/etc/</span>logrotate.d<span class="hljs-regexp">/slapd</span></code></pre><p>更过参数参考：</p><hr><p>参数 功能<br>compress 通过gzip 压缩转储以后的日志<br>nocompress 不需要压缩时，用这个参数<br>copytruncate 用于还在打开中的日志文件，把当前日志备份并截断<br>nocopytruncate 备份日志文件但是不截断<br>create mode owner group 转储文件，使用指定的文件模式创建新的日志文件<br>nocreate 不建立新的日志文件<br>delaycompress 和 compress 一起使用时，转储的日志文件到下一次转储时才压缩<br>nodelaycompress 覆盖 delaycompress 选项，转储同时压缩。<br>errors address 专储时的错误信息发送到指定的Email 地址<br>ifempty 即使是空文件也转储，这个是 logrotate 的缺省选项。<br>notifempty 如果是空文件的话，不转储<br>mail address 把转储的日志文件发送到指定的E-mail 地址<br>nomail 转储时不发送日志文件<br>olddir directory 转储后的日志文件放入指定的目录，必须和当前日志文件在同一个文件系统<br>noolddir 转储后的日志文件和当前日志文件放在同一个目录下<br>prerotate/endscript 在转储以前需要执行的命令可以放入这个对，这两个关键字必须单独成行<br>postrotate/endscript 在转储以后需要执行的命令可以放入这个对，这两个关键字必须单独成行<br>daily 指定转储周期为每天<br>weekly 指定转储周期为每周<br>monthly 指定转储周期为每月<br>rotate count 指定日志文件删除之前转储的次数，0 指没有备份，5 指保留5 个备份<br>tabootext [+] list 让logrotate 不转储指定扩展名的文件，缺省的扩展名是：.rpm-orig, .rpmsave, v, 和 ~<br>size size 当日志文件到达指定的大小时才转储，Size 可以指定 bytes (缺省)以及KB (sizek)或者MB (sizem).</p>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>openldap</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>firewalld对指定IP开放指定端口的配置</title>
     <link href="/posts/d7a36c9d.html"/>
     <url>/posts/d7a36c9d.html</url>
